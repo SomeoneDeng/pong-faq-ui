@@ -5,8 +5,21 @@ import IndexPage from './page/IndexPage';
 import CategoryPage from './page/CategoryPage';
 import SearchPage from './page/SearchPage';
 import AdminMain from './page/admin/AdminMain';
+import LoginPage from './page/Login';
 import CategoryManage from './page/admin/CategoryManage';
 import QuestionManage from './page/admin/QuestionManage';
+
+
+
+function RequireAuth({ children }) {
+    let token = localStorage.token
+
+    if (!token) {
+        return <div>403</div>
+    }
+
+    return children;
+}
 
 function Routers() {
     return useRoutes([
@@ -14,10 +27,11 @@ function Routers() {
         {path: '/answer/:id', element: <AnswerPage/>},
         {path: '/category/:id', element: <CategoryPage/>},
         {path: '/search/:key', element: <SearchPage/>},
-        {path: '/admin', element: <AdminMain/>, children: [
-            {index: true, path: '', element: <QuestionManage/>},
-            {path: 'question', element: <QuestionManage/>},
-            {path: 'category', element: <CategoryManage/>},
+        {path: '/login', element: <LoginPage/>},
+        {path: '/admin', element: <RequireAuth><AdminMain/></RequireAuth>, children: [
+            {index: true, path: '', element: <RequireAuth><CategoryManage/></RequireAuth>},
+            {path: 'question', element: <RequireAuth><QuestionManage/></RequireAuth>},
+            {path: 'category', element: <RequireAuth><CategoryManage/></RequireAuth>},
         ]}
     ])
 }
