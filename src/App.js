@@ -20,7 +20,7 @@ function App() {
           
           <Col md={{span: 6, offset: 12}} sm={{span: 6, offset: 0}}>
             {/* <Button style={{color: 'whitesmoke'}} type='link'>首页</Button> */}
-            <Link to={"/login"}><Button style={{color: 'whitesmoke'}} type='link'>管理</Button></Link>
+            <Link to={localStorage.getItem("token") != undefined && localStorage.getItem("token") != '' ? "/admin/" : '/login'}><Button style={{color: 'whitesmoke'}} type='link'>管理</Button></Link>
           </Col>
           </Row>
       </Header>

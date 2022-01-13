@@ -5,6 +5,28 @@ import { useNavigate, useParams } from "react-router-dom";
 import urls from "../urls";
 
 class LoginPage extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            width: window.innerWidth
+        }
+    }
+
+    componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+    }
+      
+    // make sure to remove the listener
+    // when the component is not mounted anymore
+    componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+    }
+      
+    handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+    };
+
     onFinish = (values) => {
     console.log('Success:', values);
         const {MAIN, ADMIN_LOGIN} = urls;
@@ -21,8 +43,8 @@ class LoginPage extends Component {
     render() {
         return <Layout style={{minHeight: '100vh'}}>
             <Row>
-                <Col span={8} offset={8}>
-                    <Card style={{marginTop: '50%'}}>
+                <Col md={{span: 8, offset: 8}} sm={{span: 24}} xs={{span: 24}}>
+                    <Card style={{marginTop: this.state.width > 700 ? '10%': ''}}>
                     <Form
                         name="basic"
                         labelCol={{ span: 8 }}

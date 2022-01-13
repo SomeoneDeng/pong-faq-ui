@@ -1,4 +1,5 @@
 import { Button, Col, Form, Input, List, Modal, Popconfirm, Row, Space, Table } from "antd";
+import ButtonGroup from "antd/lib/button/button-group";
 import Layout from "antd/lib/layout/layout";
 import axios from "axios";
 import { Component } from "react";
@@ -88,16 +89,15 @@ class CategoryManage extends Component {
             dataIndex: 'name',
             key: 'name'
         },{
-            title: 'Action',
+            title: '操作',
             key: 'action',
             render: (text, record) => (
-              <Space size="middle">
-                
+              <ButtonGroup>
                 <Button onClick={() => this.setState({seleted: record}, ()=>this.setState({visibleEdit: true}))}>编辑</Button>
-                <Popconfirm placement="left" onConfirm={()=> this.delete(record.id)}>
-                    <Button >删除</Button>
+                <Popconfirm placement="left" title="确认删除？" okText="确定" cancelText="取消" onConfirm={()=> this.delete(record.id)}>
+                    <Button type="danger">删除</Button>
                 </Popconfirm>
-              </Space>
+              </ButtonGroup>
             ),
           },]}>
 
