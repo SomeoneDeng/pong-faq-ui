@@ -8,6 +8,7 @@ import AdminMain from './page/admin/AdminMain';
 import LoginPage from './page/Login';
 import CategoryManage from './page/admin/CategoryManage';
 import QuestionManage from './page/admin/QuestionManage';
+import QuestionAddPage from './page/admin/QuestionAddPage';
 
 
 
@@ -31,6 +32,7 @@ function Routers() {
         {path: '/admin', element: <RequireAuth><AdminMain/></RequireAuth>, children: [
             {index: true, path: '', element: <RequireAuth><CategoryManage/></RequireAuth>},
             {path: 'question', element: <RequireAuth><QuestionManage/></RequireAuth>},
+            {path: 'questionadd', element: <RequireAuth><QuestionAddPage/></RequireAuth>},
             {path: 'category', element: <RequireAuth><CategoryManage/></RequireAuth>},
         ]}
     ])
